@@ -26,7 +26,7 @@ jobs:
       - id: isFirstCommit
         uses: actions/github-script@v2
         with:
-          script: return (context.event.commits[0].message == 'Initial commit') && (context.run_number == 1) 
+          script: return (github.event.commits[0].message == 'Initial commit') && (github.run_number == 1) 
           result-encoding: string
       - id: repositoryName
         uses: actions/github-script@v2
