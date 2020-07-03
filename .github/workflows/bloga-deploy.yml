@@ -25,8 +25,11 @@ jobs:
     steps:
       - id: isFirstCommit
         uses: actions/github-script@v2
+        env: 
+          COMMIT_MESSAGE: ${{ github.event.commits[0].message }}
+          RUN_NUMBER: ${{ github.run_number }}
         with:
-          script: return (github.event.commits[0].message == 'Initial commit') && (github.run_number == 1) 
+          script: return (process.env.COMMIT_MESSAGE == 'Initial commit') && (process.env.RUN_NUMBER == '1') 
           result-encoding: string
       - id: repositoryName
         uses: actions/github-script@v2
