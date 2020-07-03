@@ -66,7 +66,7 @@ jobs:
             }
           result-encoding: string
       - id: blogaSiteId
-        if: steps.isFirstCommit.outputs.result === 'false'
+        if: steps.isFirstCommit.outputs.result == 'false'
         uses: actions/github-script@v2
         env:
           BLOGA_SITE_CONFIG_URL: ${{ secrets.BLOGA_SITE_CONFIG_URL }}
@@ -89,7 +89,7 @@ jobs:
             }
           result-encoding: string          
       - id: blogaAccessTokenResponse
-        if: steps.isFirstCommit.outputs.result === 'false'
+        if: steps.isFirstCommit.outputs.result == 'false'
         uses: CamiloGarciaLaRotta/watermelon-http-client@v1.4
         with:
             url: 'https://auth.owenyoung.com/api/v1/oauth/token'
@@ -97,7 +97,7 @@ jobs:
             headers: '{"Content-Type": "application/json"}'
             data: '{"client_id": "${{ secrets.BLOGA_CLIENT_ID }}","client_secret": "${{ secrets.BLOGA_CLIENT_SECRET }}","grant_type":"client_credentials"}'
       - id: blogaAccessToken
-        if: steps.isFirstCommit.outputs.result === 'false'
+        if: steps.isFirstCommit.outputs.result == 'false'
         uses: actions/github-script@v2
         env:
           RESPONSE: ${{ steps.blogaAccessTokenResponse.outputs.response }}
